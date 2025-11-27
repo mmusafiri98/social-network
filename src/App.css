@@ -1,38 +1,922 @@
-.App {
+/* Navbar styles */
+/* Styles de base pour la navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(91, 91, 170);
+  color: white;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+body {
+  background-color: #f0f0f0;
+}
+
+/* Section gauche : logo et recherche */
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  width: 40px;
+  margin-right: 15px;
+}
+
+.navbar-search {
+  padding: 8px 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  width: 200px;
+}
+
+/* Section centrale : icônes */
+.navbar-center {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.navbar-icon {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Section droite : icônes notifications et profil */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar-profile {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.action-button.photo-button {
+  background-color: red !important;
+  color: #f9f9f9;
+}
+
+/* PostInput styles */
+.post-input {
+  margin-top: 80px;
+  /* Aggiusta questo valore a seconda dell'altezza della navbar */
+  padding: 90px;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  max-width: 700px;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 200px;
+}
+
+.post-input-header {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.post-input-body {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.post-input-field {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.share-button {
+  background-color: rgb(28, 28, 175);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.share-button:hover {
+  background-color: #45a049;
+}
+
+.post-list {
+  margin-top: 9000px;
+}
+
+
+.post-container {
+  max-width: 500px;
+  margin: 8px auto;
+  font-family: Arial, sans-serif;
+  padding: 3px;
+}
+
+.post-input-section {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.post-input-field {
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.share-button {
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.share-button:hover {
+  background-color: black;
+}
+
+.post-list {
+  margin-top: 20px;
+}
+
+.post-item {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.post-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-user-name {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.post-timestamp {
+  font-size: 12px;
+  color: #777;
+}
+
+.post-content {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  color: #1877f2;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.action-btn:hover {
+  text-decoration: underline;
+}
+
+
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.navbar-search {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  width: 250px;
+}
+
+.navbar-center {
+  display: flex;
+  gap: 15px;
+}
+
+.navbar-icon {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Styles pour le container de stories */
+/* Styles pour le container de stories */
+.stories-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: white;
+  margin-top: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.story-item {
+  width: 100px;
+  height: 150px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+
+/* Styles pour la mise en page en 3 colonnes */
+/* Styles pour la mise en page en 3 colonnes */
+
+
+.left-sidebar,
+.right-sidebar {
+  width: 250px;
+  padding: 10px;
+  background-color: #f0f2f5;
+
+}
+
+
+.layout {
+
+  display: flex;
+  flex: 1
+}
+
+.navbar-left,
+.navbar-center,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.navbar-search {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  width: 250px;
+}
+
+.navbar-icon {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.navbar-profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Styles pour le container de stories */
+.stories-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  background-color: white;
+  margin-top: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 1000px;
+  height: 589px;
+}
+
+.story-item {
+  width: 200px;
+  height: 290px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+
+
+
+.story-item::after {
+  content: 'Story Title';
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  color: white;
+  font-weight: bold;
+}
+
+
+.story {
+  width: 100px;
+  height: 150px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  padding: 5px;
+}
+
+.story-image-container {
+  width: 100%;
+  height: 150px;
+  /* Réduire la hauteur de l'image */
+  border-radius: 10px;
+  /* Coins arrondis */
+  overflow: hidden;
+  position: relative;
+  background-color: white;
+  /* Fond blanc pour les stories */
+  border: 1px solid #ccc;
+  /* Bordure autour des stories */
+}
+
+h1 {
+  position: absolute;
+  top: 50%;
+  /* Ajustez cette valeur pour descendre le h1 */
+  left: 50%;
+  transform: translate(-50%, -20%);
+  background-color: white;
+  /* Ajustez pour centrer selon votre besoin */
+}
+
+
+/* Image de chaque story */
+.story-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Texte en bas des stories */
+.story-user {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  color: white;
+  font-size: 12px;
+  /* Police plus petite */
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+}
+
+.section-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.sponsored-item,
+.page-item,
+.contact-item {
+  margin-bottom: 15px;
+}
+
+.ad-title {
+  font-weight: bold;
+}
+
+.ad-link,
+.page-link {
+  color: #007bff;
+  cursor: pointer;
+}
+
+.page-name {
+  font-weight: bold;
+}
+
+.contact-item {
+  padding: 5px 0;
+  cursor: pointer;
+
+}
+
+.sidebar-icon {
+  margin-left: 20px;
+  width: 50px;
+  /* Ajuste la largeur */
+  height: auto;
+  /* Maintient le ratio de l'image */
+}
+
+/* Conteneur principal pour aligner le profil et les posts */
+.main-container {
+  display: flex;
+  align-items: flex-start;
+  margin: 20px;
+}
+
+h3 {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Section de gauche pour le profil */
+.left-profile {
+  flex: 1;
+  max-width: 250px;
+  /* Ajustez la largeur */
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-right: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.profile-summary h3 {
+  margin-top: 0;
+  font-size: 18px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.profile-summary p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Section pour le PostInput et les posts */
+.post-container {
+  flex: 3;
+}
+
+.post-input-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.post-input-field {
+  flex: 1;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.share-button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.post-input-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.post-list {
+  margin-top: 20px;
+}
+
+.post-item {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Conteneur principal pour aligner le profil, les posts, et les contacts */
+.main-container {
+  display: flex;
+  align-items: flex-start;
+  margin: 20px;
+}
+
+/* Section de gauche pour le profil */
+.left-profile {
+  flex: 1;
+  max-width: 250px;
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-right: 20px;
+}
+
+/* Section centrale pour le PostInput et les posts */
+.center-content {
+  flex: 3;
+  margin-right: 20px;
+}
+
+/* Section de droite pour les contacts */
+.right-profile {
+  flex: 1;
+  max-width: 250px;
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Autres styles pour le post container */
+.post-container h1 {
+  font-size: 18px;
+  color: #333;
+}
+
+.post-input-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 600px;
+}
+
+.post-input-field {
+  flex: 1;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.share-button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.post-input-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.post-list {
+  margin-top: 20px;
+}
+
+.post-item {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.p {
+  font-size: 120px;
+}
+
+.stories-container {
+  display: flex;
+}
+
+.story-item {
+  margin: 10px;
+  text-align: center;
+}
+
+.story-item img {
+  width: 100px;
+  /* Ajustez la taille en fonction de vos besoins */
+  height: auto;
+  /* Conserve les proportions de l'image */
+  border-radius: 50%;
+  /* Par exemple, pour faire des images rondes */
+}
+
+.story-item {
+  width: 300px;
+  /* Imposta la larghezza desiderata */
+  height: 400px;
+  /* Imposta l'altezza desiderata */
+  overflow: hidden;
+  /* Nasconde eventuali parti dell'immagine che escono dal contenitore */
+  position: relative;
+  /* Permette di posizionare l'immagine in modo assoluto se necessario */
+}
+
+.story-item img {
+  width: 100%;
+  /* L'immagine occupa il 100% della larghezza del contenitore */
+  height: 100%;
+  /* L'immagine occupa il 100% dell'altezza del contenitore */
+  object-fit: cover;
+  /* Assicura che l'immagine riempia il contenitore senza distorsioni */
+}
+
+.story-item p {
+  position: absolute;
+  /* Posiziona il testo */
+  bottom: 10px;
+  /* Distanza dal fondo */
+  left: 10px;
+  /* Distanza da sinistra */
+  color: white;
+  /* Colore del testo */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Sfondo semi-trasparente per migliorare la leggibilità */
+  padding: 5px;
+  /* Padding intorno al testo */
+}
+
+.comment {
+  display: flex;
+  align-items: flex-start;
+  margin: 9px 0;
+  padding: 9px;
+  border-radius: 16px;
+  background-color: #f0f2f5;
+  /* Light gray background */
+  max-width: 70%;
+  /* Adjust width for a chat-bubble look */
+}
+
+.comment img {
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.comment-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-user-name {
+  font-weight: bold;
+  font-size: 0.9em;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.comment-text {
+  font-size: 0.9em;
+  color: #555;
+}
+
+.image-preview {
+  width: 10%;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  background-color: grey;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.menu-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* App.css */
+.login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  padding: 8px;
+  width: 200px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
   color: white;
+  border: none;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+/* src/Login.css */
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f5;
+  font-family: Arial, sans-serif;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-left {
+  flex: 1;
+  max-width: 400px;
+  padding: 20px;
+  text-align: center;
+}
+
+
+
+.login-left p {
+  font-size: 20px;
+  color: #606770;
+}
+
+.login-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 90px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.login-form input {
+  font-size: 16px;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #dddfe2;
+  border-radius: 6px;
+}
+
+.login-button {
+  font-size: 16px;
+  background-color: #1877f2;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.login-button:hover {
+  background-color: #166fe5;
+}
+
+.forgot-password {
+  color: #1877f2;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+.create-account {
+  font-size: 16px;
+  background-color: red;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.create-account:hover {
+  background-color: red;
+}
+
+/* Style pour la page de connexion */
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Centrer le titre et ajouter de l'espace en bas */
+.login-up h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  top: 80px;
+  color: red;
+}
+
+/* Style pour le formulaire */
+.login-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-form input,
+.login-form button {
+  margin-top: 10px;
 }
