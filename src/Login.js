@@ -1,7 +1,6 @@
 // src/Login.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Login({ onLogin }) {
     const [username, setUsername] = useState('');
@@ -10,35 +9,37 @@ function Login({ onLogin }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onLogin(username, password);
+
+        // Login locale (solo frontend)
+        if (onLogin) {
+            onLogin(username, password);
+        }
+
         navigate('/');
     };
 
-    const handleRegister = async () => {
-        try {
-            const response = await axios.post('http://localhost:5000/register', { username, password });
-            alert(response.data.message);
-        } catch (error) {
-            alert("Erreur lors de l'enregistrement : " + error.response.data.message);
-        }
+    const handleRegister = () => {
+        // Nessun backend: puoi inserire una pagina frontend o lasciarlo così
+        alert("Funzione non disponibile. Registrazione disattivata.");
     };
 
     return (
         <div className="login-page">
-            {/* Titre déplacé ici, en dehors de "login-center" */}
             <div className="login-up">
                 <h1>Login</h1>
             </div>
 
             <div className="login-center">
                 <form className="login-form" onSubmit={handleSubmit}>
+
                     <input
                         type="text"
-                        placeholder="E-mail ou numéro de téléphone"
+                        placeholder="E-mail o numero di telefono"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
+
                     <input
                         type="password"
                         placeholder="Password"
@@ -46,9 +47,21 @@ function Login({ onLogin }) {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    <button type="submit" className="login-button">Accedi</button>
-                    <a href="#" className="forgot-password">Password dimenticata?</a>
-                    <button type="button" className="create-account" onClick={handleRegister}>
+
+                    <button type="submit" className="login-button">
+                        Accedi
+                    </button>
+
+                    {/* Link corretto e accessibile */}
+                    <Link to="/forgot-password" className="forgot-password">
+                        Password dimenticata?
+                    </Link>
+
+                    <button
+                        type="button"
+                        className="create-account"
+                        onClick={handleRegister}
+                    >
                         Crea nuovo account
                     </button>
                 </form>
