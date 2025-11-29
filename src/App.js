@@ -8,15 +8,14 @@ import './App.css';
 
 function App() {
   const [posts, setPosts] = useState([]);
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Stato di autenticazione
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const addPost = (newPost) => {
     setPosts([newPost, ...posts]);
   };
 
-  // Funzione per gestire il login
   const handleLogin = (username, password) => {
-    if (username === 'admin' && password === 'password') { // Condizioni di login (solo esempio)
+    if (username === 'admin' && password === 'password') {
       setIsAuthenticated(true);
     } else {
       alert('Username o password errati');
@@ -26,11 +25,9 @@ function App() {
   return (
     <Router>
       <div className="app">
-        {/* Mostra la Navbar solo se l'utente è autenticato */}
         {isAuthenticated && <Navbar />}
 
         <Routes>
-          {/* Rotta per la pagina principale, accessibile solo se autenticato */}
           <Route
             path="/"
             element={
@@ -46,10 +43,10 @@ function App() {
             }
           />
 
-          {/* Rotta per la pagina di login */}
+          {/* FIXATO: /login e NON /Login */}
           <Route
-            path="/Login"
-            element={<Login onLogin={handleLogin} />} // Passa la funzione handleLogin come prop
+            path="/login"
+            element={<Login onLogin={handleLogin} />}
           />
         </Routes>
       </div>
@@ -58,4 +55,3 @@ function App() {
 }
 
 export default App;
-
