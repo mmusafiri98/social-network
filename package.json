@@ -2,7 +2,7 @@
   "name": "social-network",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mmusafiri98.github.io/social-network",
+  "homepage": "https://tangerine-clafoutis-9bef82.netlify.app/",
   "dependencies": {
     "@ai-sdk/groq": "^0.0.1",
     "@testing-library/jest-dom": "^5.17.0",
