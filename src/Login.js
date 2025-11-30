@@ -19,7 +19,6 @@ function Login({ onLogin }) {
     };
 
     const handleRegister = () => {
-        // Nessun backend: puoi inserire una pagina frontend o lasciarlo così
         alert("Funzione non disponibile. Registrazione disattivata.");
     };
 
@@ -27,6 +26,9 @@ function Login({ onLogin }) {
         <div className="login-page">
             <div className="login-up">
                 <h1>Login</h1>
+                <p style={{ fontSize: "14px", opacity: 0.7 }}>
+                    👉 Username: <b>admin</b> — Password: <b>password</b>
+                </p>
             </div>
 
             <div className="login-center">
@@ -34,7 +36,7 @@ function Login({ onLogin }) {
 
                     <input
                         type="text"
-                        placeholder="E-mail o numero di telefono"
+                        placeholder="E-mail o username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
@@ -52,7 +54,6 @@ function Login({ onLogin }) {
                         Accedi
                     </button>
 
-                    {/* Link corretto e accessibile */}
                     <Link to="/forgot-password" className="forgot-password">
                         Password dimenticata?
                     </Link>
