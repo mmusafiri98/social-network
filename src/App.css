@@ -2069,3 +2069,21 @@ button {
   height: 100%;
   object-fit: cover;
 }
+
+.toggle-sidebar-btn {
+  position: fixed;
+  top: 80px;
+  /* 👉 Descend le bouton (mets 90px ou 100px si besoin) */
+  left: 10px;
+
+  z-index: 9999;
+
+  background: black;
+  border: none;
+  font-size: 26px;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
