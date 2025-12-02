@@ -3,31 +3,26 @@ import React, { useState, useEffect } from 'react';
 const PostInput = () => {
     const [postText, setPostText] = useState('');
     const [posts, setPosts] = useState([]);
-    const [selectedImage, setSelectedImage] = useState(null); // State to hold the selected image
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [sidebarOpen, setSidebarOpen] = useState(true);
+
 
     useEffect(() => {
         const savedPosts = localStorage.getItem('posts');
-
         if (savedPosts) {
             const parsedPosts = JSON.parse(savedPosts);
             setPosts(Array.isArray(parsedPosts) ? parsedPosts : []);
-        } else {
-            setPosts([]);
         }
     }, []);
 
-    const handleChange = (e) => {
-        setPostText(e.target.value);
-    };
+    const handleChange = (e) => setPostText(e.target.value);
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onloadend = () => {
-                setSelectedImage(reader.result); // Set the image URL to state
-            };
-            reader.readAsDataURL(file); // Convert image file to a data URL
+            reader.onloadend = () => setSelectedImage(reader.result);
+            reader.readAsDataURL(file);
         }
     };
 
@@ -37,12 +32,12 @@ const PostInput = () => {
                 text: postText,
                 likes: 0,
                 comments: [],
-                image: selectedImage, // Include image in the post
+                image: selectedImage,
             };
             const newPosts = [newPost, ...posts];
             setPosts(newPosts);
             setPostText('');
-            setSelectedImage(null); // Reset selected image
+            setSelectedImage(null);
             localStorage.setItem('posts', JSON.stringify(newPosts));
         }
     };
@@ -63,153 +58,119 @@ const PostInput = () => {
         }
     };
 
+    const scrollStories = (amount) => {
+        const container = document.getElementById("storyScroll");
+        if (container) {
+            container.scrollBy({ left: amount, behavior: "smooth" });
+        }
+    };
+
     return (
-        <>
-            <div className="main-container">
-                <div className="left-profile">
-                    <div className="profile-summary">
-                        <h3>In breve</h3>
-                        <p>mi piace disegnare manga e disegno di tutto e suonare anche la chitarra</p>
-                        <p>📍 Di Likasi che si trova nella repubblica democratica del congo</p>
-                        <p>💔 Single</p>
-                        <p>mi piace viaggiare sono un ragazzo curioso e mi piace imparare sempre nuove cose</p>
+        <div className="page-layout" style={{ display: 'flex', minHeight: '100vh' }}>
+
+            {/* Sidebar gauche */}
+            {sidebarOpen && (
+                <aside className="sidebar-left" style={{ width: '250px', padding: '20px', borderRight: '1px solid #ccc', flexShrink: 0 }}>
+                    <h3 className="sidebar-title">Menu</h3>
+                    <ul className="sidebar-list">
+                        <li>🌐 imagine AI</li>
+                        <li>👥 Amici</li>
+                        <li>🕑 Ricordi</li>
+                        <li>🔖 Elementi salvati</li>
+                        <li>👨‍👩‍👧‍👦 Gruppi</li>
+                        <li>🎬 Reel</li>
+                        <li>🛒 Marketplace</li>
+                        <li>📰 Feed</li>
+                        <li>⬇ Altro…</li>
+                    </ul>
+                    <h3 className="sidebar-title">I tuoi collegamenti rapidi</h3>
+                    <ul className="sidebar-list">
+                        <li>⚽ Top Eleven Calcio Manageriale</li>
+                        <li>📈 Zack Stock</li>
+                    </ul>
+                </aside>
+            )}
+
+            {/* Contenu principal */}
+            <div className="main-content" style={{ flexGrow: 1, padding: '20px' }}>
+
+                {/* Bouton toggle sidebar */}
+                <button
+                    className="toggle-sidebar-btn"
+                    onClick={() => setSidebarOpen(!sidebarOpen)}
+                    style={{ position: 'absolute', top: '10px', left: '10px', zIndex: 10 }}
+                >
+                    ☰
+                </button>
+
+                {/* Stories */}
+                <div className="stories-wrapper" style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+                    <button className="story-arrow left" onClick={() => scrollStories(-300)}>‹</button>
+                    <div className="stories-container" id="storyScroll" style={{ display: 'flex', overflowX: 'auto', flexGrow: 1 }}>
+                        <div className="story-card"><img src="bambino.jpg" alt="story" style={{ width: '480px', height: '480px', objectFit: 'cover' }} /><div className="create-btn">＋</div></div>
+                        <div className="story-card"><img src="pepe.jpg" alt="story" style={{ width: '480px', height: '480px', objectFit: 'cover' }} /></div>
+                        <div className="story-card"><img src="uomo.jpg" alt="story" style={{ width: '480px', height: '480px', objectFit: 'cover' }} /></div>
                     </div>
+                    <button className="story-arrow right" onClick={() => scrollStories(300)}>›</button>
                 </div>
 
-                <div className="center-content">
-                    <div className="post-container">
+                {/* Post input */}
+                <div className="post-container" style={{ marginBottom: '20px' }}>
+                    <div className="post-input-section" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+                        <img src="pepe.jpg" alt="Profile" style={{ width: '40px', height: '40px', borderRadius: '50%' }} />
+                        <input type="text" placeholder="A cosa stai pensando Pepe?" value={postText} onChange={handleChange} style={{ flexGrow: 1, padding: '8px' }} />
+                        <input type="file" accept="image/*" onChange={handleImageChange} />
+                        <button onClick={handleShare}>Share</button>
+                    </div>
 
-
-                        <div className="post-input-section">
-                            <img src="pepe.jpg" alt="Profile" className="profile-icon" />
-                            <input
-                                type="text"
-                                placeholder="A cosa stai pensando Pepe?"
-                                value={postText}
-                                onChange={handleChange}
-                                className="post-input-field"
-                            />
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleImageChange}
-                                className="image-input"
-                            />
-                            <button className="share-button" onClick={handleShare}>Share</button>
+                    {selectedImage && (
+                        <div className="image-preview" style={{ marginBottom: '10px' }}>
+                            <img src={selectedImage} alt="Selected" style={{ maxWidth: '100%' }} />
                         </div>
+                    )}
 
-                        {selectedImage && (
-                            <div className="image-preview">
-                                <img src={selectedImage} alt="Selected" className="preview-image" />
-                            </div>
-                        )}
-
-
-                        <div className="post-list">
-                            {Array.isArray(posts) && posts.map((post, index) => (
-                                <div key={index} className="post-item">
-                                    <div className="post-header">
-                                        <img src="pepe.jpg" alt="Profile" className="profile-icon" />
-                                        <div className="post-user-info">
-                                            <span className="post-user-name">Pepe Musafiri</span>
-                                            <span className="post-timestamp">23 h</span>
-                                        </div>
+                    {/* Posts */}
+                    <div className="post-list">
+                        {posts.map((post, index) => (
+                            <div key={index} className="post-item" style={{ border: '1px solid #ddd', padding: '10px', marginBottom: '10px', borderRadius: '8px' }}>
+                                <div className="post-header" style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+                                    <img src="pepe.jpg" alt="Profile" style={{ width: '40px', height: '40px', borderRadius: '50%' }} />
+                                    <div className="post-user-info" style={{ marginLeft: '10px' }}>
+                                        <span className="post-user-name">Pepe Musafiri</span><br />
+                                        <span className="post-timestamp">23 h</span>
                                     </div>
-                                    <div className="post-content">{post.text}</div>
-                                    {post.image && (
-                                        <img src={post.image} alt="Post" className="post-image" />
-                                    )}
-                                    <div className="post-actions">
-                                        <button className="action-btn" onClick={() => handleLike(index)}>
-                                            👍 Mi piace ({post.likes})
-                                        </button>
-                                        <button className="action-btn">💬 Commenta</button>
-                                        <button className="action-btn">🔗 Condividi</button>
-                                    </div>
-
-                                    <div className="comments-section">
-                                        {post.comments.map((comment, i) => (
-                                            <div key={i} className="comment">
-                                                <img src="pepe.jpg" alt="Profile" /> {/* Placeholder profile image */}
-                                                <div className="comment-content">
-                                                    <span className="comment-user-name">Pepe Musafiri</span> {/* Placeholder name */}
-                                                    <span className="comment-text">{comment}</span>
-                                                </div>
-                                            </div>
-                                        ))}
-                                        <input
-                                            type="text"
-                                            placeholder="Scrivi un commento..."
-                                            onKeyDown={(e) => {
-                                                if (e.key === 'Enter') {
-                                                    handleAddComment(index, e.target.value);
-                                                    e.target.value = '';
-                                                }
-                                            }}
-                                            className="comment-input"
-                                        />
-                                    </div>
-
                                 </div>
-                            ))}
-                        </div>
+                                <div className="post-content" style={{ marginBottom: '8px' }}>{post.text}</div>
+                                {post.image && <img src={post.image} alt="Post" style={{ maxWidth: '100%', marginBottom: '8px' }} />}
+                                <div className="post-actions" style={{ display: 'flex', gap: '10px', marginBottom: '8px' }}>
+                                    <button onClick={() => handleLike(index)}>👍 Mi piace ({post.likes})</button>
+                                    <button>💬 Commenta</button>
+                                    <button>🔗 Condividi</button>
+                                </div>
+                                <div className="comments-section">
+                                    {post.comments.map((comment, i) => (
+                                        <div key={i} style={{ display: 'flex', gap: '8px', marginBottom: '4px' }}>
+                                            <img src="pepe.jpg" alt="" style={{ width: '30px', height: '30px', borderRadius: '50%' }} />
+                                            <div><span className="comment-user-name">Pepe Musafiri</span> <span>{comment}</span></div>
+                                        </div>
+                                    ))}
+                                    <input type="text" placeholder="Scrivi un commento..." onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                            handleAddComment(index, e.target.value);
+                                            e.target.value = '';
+                                        }
+                                    }} style={{ width: '100%', padding: '6px' }} />
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
-                <div className="right-profile">
-                    <div className="contact-summary">
-                        <h3>contatti principali</h3>
-                        <p>marco merlo</p>
-                        <p>jessica fischer</p>
-                        <p>veronica sanchez</p>
-                        <p>valentino rossi</p>
-                        <p>lorenzo falco</p>
-                        <p>mario il belli</p>
-                        <p>veronica de cruise</p>
-                        <p>valentino irabella</p>
-                        <p>marco erlo</p>
-                        <p>rebecca fischer</p>
-                        <p>jessica sanchez</p>
-                        <p>sara rossi</p>
-                        <p>paolo falco</p>
-                        <p>miranda kelli</p>
-                        <p>versino pieri</p>
-                        <p>iman la vita</p>
-                        <p>marco merlo</p>
-                        <p>jessica fischer</p>
-                        <p>veronica sanchez</p>
-                        <p>valentino rossi</p>
-                        <p>lorenzo falco</p>
-                        <p>mario il belli</p>
-                        <p>veronica de cruise</p>
-                        <p>valentino irabella</p>
-                        <p>marco erlo</p>
-                        <p>rebecca fischer</p>
-                        <p>jessica sanchez</p>
-                        <p>sara rossi</p>
-                        <p>paolo falco</p>
-                        <p>miranda kelli</p>
-                        <p>versino pieri</p>
-                        <p>iman la vita</p>
-                        <p>jessica fischer</p>
-                        <p>veronica sanchez</p>
-                        <p>valentino rossi</p>
-                        <p>Renzo Vicenzo</p>
-                        <p>mario gilberto</p>
-                        <p>veronica de cruise</p>
-                        <p>irabella bella</p>
-                        <p>marco erlo</p>
-                        <p>rebecca fischer</p>
-                        <p>jessica sanchez</p>
-                        <p>sara rossi</p>
-                        <p>paolo falco</p>
-                        <p>miranda kelli</p>
-                        <p>versino pieri</p>
-                        <p>iman la vita</p>
-                    </div>
-                </div>
+
             </div>
-        </>
+        </div>
     );
+
+
 };
 
 export default PostInput;

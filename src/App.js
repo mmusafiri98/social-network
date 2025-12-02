@@ -5,6 +5,9 @@ import Navbar from './components/Navbar';
 import MainFeed from './components/MainFeed';
 import Login from './Login';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 function App() {
   const [posts, setPosts] = useState([]);
