@@ -4,17 +4,17 @@ const PostInput = () => {
     const [postText, setPostText] = useState("");
     const [posts, setPosts] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     const storyRef = useRef(null);
 
-    // Recupero post salvati
+    // Recupera i post dal localStorage
     useEffect(() => {
         const savedPosts = JSON.parse(localStorage.getItem("posts"));
         if (Array.isArray(savedPosts)) setPosts(savedPosts);
     }, []);
 
-    // Auto–carousel infinito ogni 3 secondi
+    // Carousel automatico per le stories
     useEffect(() => {
         const scrollContainer = storyRef.current;
         if (!scrollContainer) return;
@@ -35,14 +35,13 @@ const PostInput = () => {
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (!file) return;
-
         const reader = new FileReader();
         reader.onloadend = () => setSelectedImage(reader.result);
         reader.readAsDataURL(file);
     };
 
     const handleShare = () => {
-        if (!postText.trim()) return;
+        if (!postText.trim() && !selectedImage) return;
 
         const newPost = {
             text: postText,
@@ -51,74 +50,91 @@ const PostInput = () => {
             image: selectedImage,
         };
 
-        const updated = [newPost, ...posts];
-        setPosts(updated);
-        localStorage.setItem("posts", JSON.stringify(updated));
+        const updatedPosts = [newPost, ...posts];
+        setPosts(updatedPosts);
+        localStorage.setItem("posts", JSON.stringify(updatedPosts));
 
         setPostText("");
         setSelectedImage(null);
     };
 
     const handleLike = (index) => {
-        const updated = [...posts];
-        updated[index].likes++;
-        setPosts(updated);
-        localStorage.setItem("posts", JSON.stringify(updated));
+        const updatedPosts = [...posts];
+        updatedPosts[index].likes++;
+        setPosts(updatedPosts);
+        localStorage.setItem("posts", JSON.stringify(updatedPosts));
     };
 
     const handleAddComment = (index, value) => {
         if (!value.trim()) return;
 
-        const updated = [...posts];
-        updated[index].comments.push(value);
-        setPosts(updated);
-        localStorage.setItem("posts", JSON.stringify(updated));
+        const updatedPosts = [...posts];
+        updatedPosts[index].comments.push(value);
+        setPosts(updatedPosts);
+        localStorage.setItem("posts", JSON.stringify(updatedPosts));
     };
 
     return (
         <div className="page-layout">
+            {/* Burger Menu Button — Solo Mobile/Tablet */}
+            <button 
+                className="burger-menu-btn" 
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+                aria-label="Toggle menu"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
-            {/* TOGGLE SIDEBAR */}
-            <button className="toggle-sidebar-btn" onClick={() => setSidebarOpen(!sidebarOpen)}>☰</button>
-
-            {/* SIDEBAR */}
+            {/* Overlay per chiudere sidebar su mobile */}
             {sidebarOpen && (
-                <aside className="sidebar">
-                    <h3>Menu</h3>
-                    <ul>
-                        <li>🌐 Imagine AI</li>
-                        <li>👥 Amici</li>
-                        <li>🕑 Ricordi</li>
-                        <li>🔖 Salvati</li>
-                        <li>👨‍👩‍👧‍👦 Gruppi</li>
-                        <li>🎬 Reel</li>
-                        <li>🛒 Marketplace</li>
-                        <li>📰 Feed</li>
-                    </ul>
-                </aside>
+                <div 
+                    className="sidebar-overlay" 
+                    onClick={() => setSidebarOpen(false)}
+                ></div>
             )}
 
-            {/* CONTENUTO PRINCIPALE */}
-            <main className="main-content">
+            {/* Sidebar */}
+            <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
+                <button 
+                    className="close-sidebar-btn" 
+                    onClick={() => setSidebarOpen(false)}
+                >
+                    ✕
+                </button>
+                
+                <h3>Menu</h3>
+                <ul>
+                    <li>🌐 Imagine AI</li>
+                    <li>👥 Amici</li>
+                    <li>🕑 Ricordi</li>
+                    <li>🔖 Salvati</li>
+                    <li>👨‍👩‍👧‍👦 Gruppi</li>
+                    <li>🎬 Reel</li>
+                    <li>🛒 Marketplace</li>
+                    <li>📰 Feed</li>
+                </ul>
+            </aside>
 
-                {/* CAROUSEL STORIES */}
+            {/* Main Content */}
+            <main className="main-content">
+                {/* Stories Carousel */}
                 <div className="stories-wrapper">
                     <div className="stories-container" ref={storyRef}>
                         <div className="story-card"><img src="bambino.jpg" alt="story" /></div>
                         <div className="story-card"><img src="pepe.jpg" alt="story" /></div>
                         <div className="story-card"><img src="uomo.jpg" alt="story" /></div>
-
-                        {/* COPIE per loop infinito visivo fluido */}
+                        {/* Copie per loop fluido */}
                         <div className="story-card"><img src="bambino.jpg" alt="story" /></div>
                         <div className="story-card"><img src="pepe.jpg" alt="story" /></div>
                         <div className="story-card"><img src="uomo.jpg" alt="story" /></div>
                     </div>
                 </div>
 
-                {/* INPUT POST */}
+                {/* Post Input */}
                 <div className="post-input-box">
                     <img src="pepe.jpg" alt="Profile" className="profile" />
-
                     <input
                         type="text"
                         placeholder="A cosa stai pensando Pepe?"
@@ -126,19 +142,18 @@ const PostInput = () => {
                         onChange={handleChange}
                         className="post-input"
                     />
-
                     <input type="file" accept="image/*" onChange={handleImageChange} className="file-input" />
                     <button className="share-btn" onClick={handleShare}>Share</button>
                 </div>
 
-                {/* PREVIEW IMMAGINE */}
+                {/* Preview Image */}
                 {selectedImage && (
                     <div className="image-preview">
                         <img src={selectedImage} alt="preview" />
                     </div>
                 )}
 
-                {/* POSTS */}
+                {/* Posts */}
                 <div className="post-list">
                     {posts.map((post, index) => (
                         <div key={index} className="post-item">
@@ -152,7 +167,9 @@ const PostInput = () => {
 
                             <p className="post-text">{post.text}</p>
 
-                            {post.image && <img src={post.image} className="post-image" alt="post" />}
+                            {post.image && (
+                                <img src={post.image} className="post-image" alt="post" />
+                            )}
 
                             <div className="post-actions">
                                 <button onClick={() => handleLike(index)}>👍 {post.likes}</button>
@@ -160,7 +177,6 @@ const PostInput = () => {
                                 <button>🔗</button>
                             </div>
 
-                            {/* COMMENTI */}
                             <div className="comments">
                                 {post.comments.map((c, i) => (
                                     <div key={i} className="comment">
@@ -183,7 +199,6 @@ const PostInput = () => {
                         </div>
                     ))}
                 </div>
-
             </main>
         </div>
     );
