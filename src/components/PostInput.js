@@ -76,9 +76,9 @@ const PostInput = () => {
 
     return (
         <div className="page-layout">
-            {/* Burger Menu Button — Solo Mobile/Tablet */}
-            <button 
-                className="burger-menu-btn" 
+            {/* Burger Menu Button — Solo Mobile/Tablet - SOTTO IL NAVBAR */}
+            <button
+                className="burger-menu-btn"
                 onClick={() => setSidebarOpen(!sidebarOpen)}
                 aria-label="Toggle menu"
             >
@@ -89,21 +89,21 @@ const PostInput = () => {
 
             {/* Overlay per chiudere sidebar su mobile */}
             {sidebarOpen && (
-                <div 
-                    className="sidebar-overlay" 
+                <div
+                    className="sidebar-overlay"
                     onClick={() => setSidebarOpen(false)}
                 ></div>
             )}
 
             {/* Sidebar */}
             <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
-                <button 
-                    className="close-sidebar-btn" 
+                <button
+                    className="close-sidebar-btn"
                     onClick={() => setSidebarOpen(false)}
                 >
                     ✕
                 </button>
-                
+
                 <h3>Menu</h3>
                 <ul>
                     <li>🌐 Imagine AI</li>
