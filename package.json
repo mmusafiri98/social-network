@@ -2,7 +2,7 @@
   "name": "social-network",
   "version": "0.1.0",
   "private": true,
-  "homepage": "netveb.netlify.app",
+  "homepage": "https://netveb.netlify.app",
   "dependencies": {
     "@ai-sdk/groq": "^0.0.1",
     "@testing-library/jest-dom": "^5.17.0",
