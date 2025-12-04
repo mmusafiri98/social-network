@@ -32,6 +32,7 @@ body {
   width: 200px;
 }
 
+
 /* Section centrale : icônes */
 .navbar-center {
   display: flex;
@@ -78,6 +79,22 @@ body {
   margin-left: auto;
   margin-right: auto;
   padding-top: 200px;
+}
+
+/* --- POST BOX RESPONSIVE --- */
+.post-input-box {
+  display: flex;
+  align-items: flex-end;
+  /* 👈 CAMBIATO: allinea tutto in basso */
+  gap: 10px;
+  background: white;
+  padding: 12px;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: 0 auto 20px auto;
+  width: 100%;
+  /* 👈 Corretto anche questo (era 900%) */
+  margin-top: 10px;
 }
 
 .post-input-header {
@@ -150,14 +167,14 @@ body {
   border: 1px solid #ccc;
 }
 
-.share-button {
-  background-color: blue;
+.share-btn {
+  padding: 8px 14px;
+  background: royalblue;
   color: white;
-  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
-  margin-left: 10px;
-  cursor: pointer;
+  border-radius: 6px;
+  margin-top: 10px;
+  /* Sposta verso il basso di 10px */
 }
 
 .share-button:hover {
@@ -1010,16 +1027,23 @@ button {
   width: 120px;
 }
 
-.share-button {
+.share-bn {
   padding: 10px 15px;
   background: #1877f2;
   color: white;
   border: none;
   border-radius: 20px;
   cursor: pointer;
+
+  position: fixed;
+  bottom: 20px;
+  /* distance du bas */
+  right: 20px;
+  /* position à droite */
 }
 
-.share-button:hover {
+
+.share-btn:hover {
   background: #1464c8;
 }
 
@@ -1158,7 +1182,7 @@ button {
   }
 
   .post-input-section {
-    flex-direction: column;
+    flex-direction: flex-end;
   }
 
   .post-input-field,
@@ -1751,15 +1775,6 @@ button {
 }
 
 /* POST INPUT */
-.post-input-box {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  background: white;
-  padding: 12px;
-  border-radius: 8px;
-  margin: 20px 0;
-}
 
 .profile {
   width: 40px;
@@ -1767,11 +1782,12 @@ button {
   border-radius: 50%;
 }
 
+/* Input */
 .post-input {
   flex-grow: 1;
   padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  margin-top: -3px;
+  /* Sposta verso l'alto di 20px */
 }
 
 .share-btn {
@@ -1830,7 +1846,7 @@ button {
 /* RESPONSIVE COMPLETO */
 @media (max-width: 700px) {
   .post-input-box {
-    flex-direction: column;
+    flex-direction: flex-end;
     align-items: stretch;
   }
 
@@ -1928,9 +1944,10 @@ button {
   background: white;
   padding: 12px;
   border-radius: 10px;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto 20px auto;
-  width: 100%;
+  width: 800%;
+  margin-top: 10px;
 }
 
 /* Profilo */
